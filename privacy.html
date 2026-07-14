@@ -14,63 +14,147 @@
   hr { border: none; border-top: 1px solid #ccc; margin: 2.5rem 0; }
   a { color: #34508f; }
   code { background: rgba(127,127,127,.15); padding: 0 .3em; border-radius: 3px; }
+  ul { padding-left: 1.3rem; }
+  li { margin: .4rem 0; }
 </style>
 </head>
 <body>
 
 <h1>Refill Neo プライバシーポリシー</h1>
-<p class="updated">最終更新日: 2026年7月6日</p>
+<p class="updated">最終更新日: 2026年7月11日</p>
 
-<p>Refill Neo（リフィル ネオ、以下「本アプリ」）は、利用者のプライバシーを最大限尊重します。本アプリは外部サーバーを持たず、いかなる個人情報・利用データも<strong>一切収集・保存・送信しません</strong>。</p>
+<p>Refill Neo（以下「本アプリ」）は、個人開発者である太田真知（連絡先: <a href="mailto:masatomo@firstcallmusic.net">masatomo@firstcallmusic.net</a>。以下「開発者」）が提供する、システム手帳（リフィル）風のカレンダーアプリです。本アプリはiPhone・iPad（iOS/iPadOS）に加え、Apple Silicon Mac上でも動作しますが、いずれの環境でも本ポリシーの内容は同一です。本ポリシーは、本アプリにおける利用者情報の取り扱いについて説明します。</p>
 
-<h2>収集する情報</h2>
-<p>ありません。本アプリは利用者に関するいかなる情報も収集しません。アカウント登録、ログイン、個人情報の入力は不要です。</p>
+<h2>1. 基本方針</h2>
+<p>本アプリは、<strong>開発者が管理するサーバーやデータベースを一切持ちません</strong>。開発者は、本アプリを通じて利用者の個人データを収集・保存・共有することはありません。third-party の解析（アナリティクス）SDK・広告SDK・トラッキングの仕組みも組み込まれていません。</p>
+<p>一方で、本アプリは一部の機能のために、<strong>利用者の端末から Apple や（利用者が連携した場合のみ）Dropbox のサービスへ直接通信します</strong>（第3章）。これらの通信で送られる情報は、当該機能の提供のためだけに使われ、<strong>開発者のサーバーを経由せず、開発者が受け取ることもありません</strong>。</p>
 
-<h2>カレンダー・リマインダーへのアクセス</h2>
-<p>本アプリは、予定やタスクを表示・編集するために、iOS標準の「カレンダー」（EventKit）および「リマインダー」へのアクセス許可を求めます。これらのデータは Apple の「カレンダー」／「リマインダー」（お使いの端末、および利用者自身が設定した iCloud 等のアカウント）に保存され、本アプリがそれらを独自に収集・外部送信・第三者提供することは<strong>ありません</strong>。アクセスは、あなたの予定・タスクを画面に表示し編集するためだけに使用されます。</p>
+<h2>2. データの保存場所</h2>
+<p>本アプリが取り扱う情報は、以下のいずれかにのみ保存されます。</p>
+<ul>
+  <li><strong>予定データ</strong>: iOS標準の「カレンダー」（Apple の EventKit フレームワーク）に保存されます。Apple および、利用者がご自身のiOS設定で連携したアカウント（iCloud、Google など）が管理するものであり、本アプリ自身のサーバーには一切送信されません。</li>
+  <li><strong>タスクデータ</strong>: iOS標準の「リマインダー」（EventKit Reminders）に保存されます。予定データと同様です。</li>
+  <li><strong>表示設定・スクリーンセーバー設定</strong>: 表示テーマ、初期タブ、天気表示の地点（緯度・経度）、写真ソースの選択などの設定が、端末内のUserDefaults（アプリのローカル設定領域）に保存されます。</li>
+  <li><strong>Dropbox 認証情報</strong>（Dropboxを連携した場合のみ）: Dropbox のアクセストークンは、端末の<strong>キーチェーン（Keychain）</strong>に安全に保存されます。</li>
+  <li><strong>写真キャッシュ</strong>（Dropbox をスライドショーの写真ソースにした場合のみ）: 表示のために取得した画像が、端末内のキャッシュ領域に一時保存されます（上限を超えると古いものから自動削除）。</li>
+</ul>
 
-<h2>ネットワーク通信・サーバー</h2>
-<p>本アプリは自前のサーバーを持たず、利用データを外部へ送信しません。カレンダー表示や暦（吉日・月齢・日の出／日の入り）の計算はすべて<strong>お使いの端末内（オンデバイス）で完結</strong>します。日の出・日の入りは利用者が設定した地点（緯度・経度）に基づいて計算し、位置情報（GPS）の取得や送信は行いません。</p>
+<h2>3. ネットワーク通信について</h2>
+<p>本アプリは、以下の機能を利用する場合に限り、端末から各サービスへ <strong>HTTPS で直接通信</strong>します。いずれも開発者のサーバーは介在しません。</p>
+<ul>
+  <li><strong>天気の表示（Apple WeatherKit）</strong>: スクリーンセーバー（フォトフレーム）で天気表示を有効にしている場合、利用者が設定画面で指定した地点の<strong>緯度・経度</strong>を Apple の WeatherKit に送信し、天気情報を取得します。位置情報（GPS）の権限は使用せず、送信するのは利用者が明示的に設定した地点の座標のみです。天気データは Apple が提供し、Apple のプライバシー方針に従って扱われます。天気表示をオフにすれば、この通信は行われません。</li>
+  <li><strong>写真スライドショーの Dropbox 連携（任意）</strong>: スライドショーの写真ソースとして Dropbox を選んで連携した場合にのみ、Dropbox との間で認証（OAuth 2.0 / PKCE）・指定フォルダの一覧取得・画像のダウンロードを行います。認証トークンはキーチェーンに保存されます。Dropbox を連携しなければ、Dropbox との通信は一切発生しません。</li>
+  <li><strong>カレンダー・リマインダーの外部アカウント同期</strong>: 予定・タスクを iCloud や Google などの外部アカウントと同期する処理は、従来どおり iOS（オペレーティングシステム）が「設定」アプリのアカウント機能を通じて行うものであり、本アプリはその同期処理に関与せず、通信内容を取得することもありません。</li>
+</ul>
 
-<h2>解析・広告・トラッキング</h2>
-<p>本アプリはアナリティクス、広告、トラッキング、第三者SDKによる情報収集を<strong>一切行いません</strong>。</p>
+<h2>4. 写真へのアクセス（スライドショー）について</h2>
+<p>スクリーンセーバー（フォトフレーム）機能でフォトライブラリの写真を表示する場合にのみ、利用者の許可を得て写真にアクセスします。写真は表示のために端末内で扱われ（iCloud写真の場合は Apple 経由で端末に取得され）、<strong>開発者に送信されることはありません</strong>。この機能を使わなければ写真にはアクセスしません。</p>
 
-<h2>購入・サブスクリプション</h2>
-<p>アプリ内課金（サブスクリプション）の決済は Apple（App Store / StoreKit）が処理します。本アプリが利用者の支払い情報を受け取る・保存することはありません。ご購読の状態管理・更新・解約は Apple の仕組みを通じて行われます。</p>
+<h2>5. アクセス許可（パーミッション）の利用目的</h2>
+<p>本アプリは、以下のシステム権限を利用します。</p>
+<ul>
+  <li><strong>カレンダーへのフルアクセス</strong>: 予定の表示・作成・編集・削除のため。</li>
+  <li><strong>リマインダーへのフルアクセス</strong>: タスクの表示・作成・編集・削除のため。</li>
+  <li><strong>写真ライブラリ</strong>: スクリーンセーバー（フォトフレーム）でフォトライブラリの写真を表示するため（この機能を使う場合のみ）。</li>
+  <li><strong>モーションセンサー（加速度センサー）</strong>: 端末を振る操作（シェイク）で「今日」へ移動する機能のため、加速度の値のみを一時的に読み取ります。この値は端末内でのみ処理され、記録・保存・送信は行いません（iOSの仕組み上、この用途では許可ダイアログは表示されません）。</li>
+</ul>
 
-<h2>第三者への提供</h2>
-<p>収集する情報が存在しないため、第三者への提供も行いません。</p>
+<h2>6. 通知について</h2>
+<p>本アプリ独自のプッシュ通知の仕組みはありません。予定に設定したアラーム（EKAlarm）は、iOS標準のカレンダー機能が通知します。</p>
 
-<h2>お問い合わせ</h2>
-<p>本ポリシーに関するお問い合わせは、<a href="mailto:info@firstcall.plus">info@firstcall.plus</a> までご連絡ください。</p>
+<h2>7. 第三者について</h2>
+<p>開発者は、利用者のいかなるデータも第三者に提供・販売しません。本アプリには広告表示の仕組みもありません。ただし本アプリは、天気表示に <strong>Apple WeatherKit</strong> を、（利用者が連携した場合のみ）写真ソースに <strong>Dropbox</strong> を利用します。これらのサービスに送信される情報は、それぞれのプライバシーポリシー（Apple / Dropbox）に従って扱われます。</p>
+<ul>
+  <li>Apple のプライバシー方針: <a href="https://www.apple.com/legal/privacy/">https://www.apple.com/legal/privacy/</a></li>
+  <li>Dropbox のプライバシー方針: <a href="https://www.dropbox.com/privacy">https://www.dropbox.com/privacy</a></li>
+</ul>
+
+<h2>8. 子どものプライバシー</h2>
+<p>本アプリは特定の年齢層を対象としたものではなく、開発者が子どもから個人情報を収集することはありません。</p>
+
+<h2>9. データの削除について</h2>
+<ul>
+  <li>カレンダー・リマインダーのデータは、iOS標準の「カレンダー」「リマインダー」アプリ、または「設定」アプリのアカウント管理から削除できます。</li>
+  <li>Dropbox の連携は、アプリの設定から解除できます（キーチェーンのトークンが削除されます）。写真キャッシュは端末内にのみ保存され、アプリの削除で消去されます。</li>
+  <li>本アプリを削除（アンインストール）しても、iOS標準のカレンダー・リマインダーのデータには影響しません。</li>
+</ul>
+
+<h2>10. ポリシーの変更</h2>
+<p>本ポリシーの内容は、本アプリの機能追加・変更に伴い改定されることがあります。重要な変更がある場合は、本ページの「最終更新日」を更新してお知らせします。</p>
+
+<h2>11. お問い合わせ</h2>
+<ul>
+  <li>開発者: 太田真知（個人開発）</li>
+  <li>メール: <a href="mailto:masatomo@firstcallmusic.net">masatomo@firstcallmusic.net</a></li>
+</ul>
 
 <hr>
 
 <h1>Refill Neo Privacy Policy</h1>
-<p class="updated">Last updated: July 6, 2026</p>
+<p class="updated">Last updated: July 11, 2026</p>
 
-<p>Refill Neo (the "App") respects your privacy to the fullest extent. The App has no servers of its own and <strong>does not collect, store, or transmit any personal information or usage data whatsoever</strong>.</p>
+<p>Refill Neo (the "App") is a system-notebook (refill)-style calendar app provided by an individual developer, Masatomo Ota (contact: <a href="mailto:masatomo@firstcallmusic.net">masatomo@firstcallmusic.net</a>; the "Developer"). The App runs on iPhone and iPad (iOS/iPadOS) as well as on Apple Silicon Mac; this policy applies equally on all of these platforms. This policy explains how the App handles user information.</p>
 
-<h2>Information We Collect</h2>
-<p>None. The App collects no information about its users. No account, sign-in, or personal data entry is required.</p>
+<h2>1. Basic policy</h2>
+<p>The App has <strong>no server or database operated by the Developer</strong>. The Developer does not collect, store, or share any personal data of users through the App. The App contains no third-party analytics SDKs, no advertising SDKs, and no tracking mechanisms.</p>
+<p>However, for certain features the App communicates <strong>directly from the user's device to Apple and (only if the user connects it) Dropbox</strong> (see Section 3). Information sent in those requests is used solely to provide the feature in question; it <strong>does not pass through, and is not received by, the Developer</strong>.</p>
 
-<h2>Access to Calendar and Reminders</h2>
-<p>To display and edit your events and tasks, the App requests access to the system <strong>Calendar</strong> (EventKit) and <strong>Reminders</strong>. That data is stored by Apple's Calendar and Reminders (on your device and in any account, such as iCloud, that you have configured). The App does <strong>not</strong> separately collect, transmit, or share this data with third parties. Access is used solely to show and edit your own events and tasks on screen.</p>
+<h2>2. Where data is stored</h2>
+<ul>
+  <li><strong>Event data</strong>: Stored in the iOS "Calendar" (Apple's EventKit). Managed by Apple and any accounts the user has linked in iOS Settings (iCloud, Google, etc.); never sent to any server operated by the Developer.</li>
+  <li><strong>Task data</strong>: Stored in iOS "Reminders" (EventKit Reminders); same as above.</li>
+  <li><strong>Display and screensaver settings</strong>: Theme, initial tab, the weather location (latitude/longitude), photo-source selection, etc. are stored in on-device UserDefaults.</li>
+  <li><strong>Dropbox credentials</strong> (only if Dropbox is connected): The Dropbox access token is stored securely in the device <strong>Keychain</strong>.</li>
+  <li><strong>Photo cache</strong> (only if Dropbox is used as the slideshow source): Downloaded images are cached temporarily on the device (oldest removed automatically above a size limit).</li>
+</ul>
 
-<h2>Network Communication and Servers</h2>
-<p>The App has no server of its own and does not send any usage data externally. Calendar rendering and almanac calculations (auspicious days, moon age, sunrise/sunset) are performed <strong>entirely on your device</strong>. Sunrise and sunset times are computed from a location (latitude/longitude) that you set; the App does not obtain or transmit your GPS location.</p>
+<h2>3. Network communication</h2>
+<p>The App communicates over <strong>HTTPS directly from the device</strong> only when the following features are used. No Developer server is involved in any case.</p>
+<ul>
+  <li><strong>Weather (Apple WeatherKit)</strong>: When the weather display in the screensaver (photo frame) is enabled, the App sends the <strong>latitude/longitude the user configured in Settings</strong> to Apple WeatherKit to retrieve weather. The App does not use Location (GPS) permission; only the coordinates the user explicitly set are sent. Weather data is provided by Apple and handled under Apple's privacy policy. Turning weather off stops this communication.</li>
+  <li><strong>Dropbox for the photo slideshow (optional)</strong>: Only if the user chooses Dropbox as a slideshow photo source and connects it, the App performs authentication (OAuth 2.0 / PKCE), folder listing, and image download with Dropbox. The token is stored in the Keychain. If Dropbox is not connected, no communication with Dropbox occurs.</li>
+  <li><strong>Calendar/Reminders account sync</strong>: Syncing events/tasks with external accounts (iCloud, Google, etc.) is performed by iOS via the account features in the Settings app, as before. The App does not participate in or observe that sync.</li>
+</ul>
 
-<h2>Analytics, Ads, and Tracking</h2>
-<p>The App contains <strong>no analytics, no advertising, no tracking, and no third-party data-collection SDKs</strong>.</p>
+<h2>4. Photo access (slideshow)</h2>
+<p>The App accesses your photos, with your permission, only when you use the screensaver (photo frame) feature to display photo-library images. Photos are handled on the device for display (for iCloud photos, fetched to the device via Apple) and are <strong>not sent to the Developer</strong>. If you do not use this feature, the App does not access photos.</p>
 
-<h2>Purchases and Subscriptions</h2>
-<p>In-app purchases (subscriptions) are processed by Apple through the App Store / StoreKit. The App never receives or stores your payment information. Management, renewal, and cancellation of your subscription are handled through Apple.</p>
+<h2>5. Permissions and their purposes</h2>
+<ul>
+  <li><strong>Full access to Calendar</strong>: To display, create, edit, and delete events.</li>
+  <li><strong>Full access to Reminders</strong>: To display, create, edit, and delete tasks.</li>
+  <li><strong>Photo library</strong>: To display photo-library images in the screensaver (photo frame), only when that feature is used.</li>
+  <li><strong>Motion sensor (accelerometer)</strong>: For the shake-to-go-to-today gesture; only accelerometer values are read momentarily, processed on-device only, and never recorded, stored, or transmitted (iOS does not show a permission prompt for this use).</li>
+</ul>
 
-<h2>Sharing With Third Parties</h2>
-<p>Because no information is collected, nothing is shared with third parties.</p>
+<h2>6. Notifications</h2>
+<p>The App has no push-notification mechanism of its own. Alarms set on events (EKAlarm) are delivered by the standard iOS Calendar.</p>
 
-<h2>Contact</h2>
-<p>For questions about this policy, please contact <a href="mailto:info@firstcall.plus">info@firstcall.plus</a>.</p>
+<h2>7. Third parties</h2>
+<p>The Developer does not provide or sell any user data to third parties, and the App shows no advertising. The App does use <strong>Apple WeatherKit</strong> for weather and, <strong>only if the user connects it, Dropbox</strong> as a photo source. Information sent to those services is handled under their respective privacy policies (Apple / Dropbox).</p>
+<ul>
+  <li>Apple Privacy Policy: <a href="https://www.apple.com/legal/privacy/">https://www.apple.com/legal/privacy/</a></li>
+  <li>Dropbox Privacy Policy: <a href="https://www.dropbox.com/privacy">https://www.dropbox.com/privacy</a></li>
+</ul>
+
+<h2>8. Children's privacy</h2>
+<p>The App is not directed at any particular age group, and the Developer does not knowingly collect personal information from children.</p>
+
+<h2>9. Deleting data</h2>
+<ul>
+  <li>Calendar and Reminders data can be deleted in the standard iOS "Calendar"/"Reminders" apps or via account management in Settings.</li>
+  <li>Dropbox can be disconnected in the App's settings (which removes the Keychain token). The photo cache is stored only on the device and is removed when the App is deleted.</li>
+  <li>Deleting (uninstalling) the App does not affect the standard iOS Calendar/Reminders data.</li>
+</ul>
+
+<h2>10. Changes to this policy</h2>
+<p>This policy may be revised as the App's features change. Material changes will be announced by updating the "Last updated" date on this page.</p>
+
+<h2>11. Contact</h2>
+<ul>
+  <li>Developer: Masatomo Ota (individual developer)</li>
+  <li>Email: <a href="mailto:masatomo@firstcallmusic.net">masatomo@firstcallmusic.net</a></li>
+</ul>
 
 </body>
 </html>
